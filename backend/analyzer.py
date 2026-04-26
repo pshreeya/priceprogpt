@@ -1,8 +1,5 @@
-"""Calls the LLM and returns a validated PricingRecommendation.
+#Calls the LLM and returns a validated PricingRecommendation.
 
-Works against free models on OpenRouter that occasionally return JSON in the
-`content` field instead of using the tool-calling mechanism — we handle both.
-"""
 from __future__ import annotations
 
 import os
@@ -48,7 +45,6 @@ def _build_tool() -> dict:
 
 
 def _send_with_backoff(client, **kwargs):
-    """client.chat.send with exponential backoff on 429."""
     for attempt in range(RATE_LIMIT_RETRIES):
         try:
             return client.chat.send(**kwargs)
@@ -58,32 +54,23 @@ def _send_with_backoff(client, **kwargs):
                     "Rate limited by the :free model provider. "
                     "Wait ~60 seconds or switch to a paid variant."
                 )
-            time.sleep(2 ** attempt)  # 1s, 2s
+            time.sleep(2 ** attempt)  
 
 
 def _strip_code_fences(text: str) -> str:
-    """Free models often wrap JSON in ```json ... ``` fences."""
+    #Free models often wrap JSON in ```json ... ``` fences.
     s = text.strip()
     if not s.startswith("```"):
         return s
-    # drop opening fence line
     s = s.split("\n", 1)[1] if "\n" in s else s[3:]
-    # drop closing fence
     if s.rstrip().endswith("```"):
         s = s.rstrip()[:-3]
-    # drop optional 'json' language hint
     if s.lstrip().lower().startswith("json"):
         s = s.lstrip()[4:]
     return s.strip()
 
 
 def _extract_recommendation(message) -> Optional[PricingRecommendation]:
-    """Try tool_calls first, fall back to JSON in content.
-
-    Returns the validated recommendation, or None if nothing usable was found.
-    Re-raises ValidationError if the structure is present but schema-invalid
-    (so the outer loop can give the model a correction hint).
-    """
     tool_calls = getattr(message, "tool_calls", None) or []
     for call in tool_calls:
         if call.function.name == TOOL_NAME:
@@ -92,7 +79,6 @@ def _extract_recommendation(message) -> Optional[PricingRecommendation]:
                 return PricingRecommendation.model_validate_json(raw)
             return PricingRecommendation.model_validate(raw)
 
-    # Fallback: model returned JSON as text
     content = getattr(message, "content", "") or ""
     cleaned = _strip_code_fences(content)
     if cleaned:
@@ -144,7 +130,6 @@ def analyze(req: PricingInput) -> PricingRecommendation:
                     f"Last error: {last_error or 'no tool call and no parseable JSON in content'}"
                 )
 
-            # Feed the issue back and retry
             messages.append(
                 {"role": "assistant", "content": getattr(message, "content", "") or ""}
             )

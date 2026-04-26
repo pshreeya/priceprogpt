@@ -12,7 +12,7 @@ class ProductType(str, Enum):
 
 
 class PricingInput(BaseModel):
-    """Inputs for a single pricing decision."""
+    #Inputs for the pricing decision to take place.
 
     product_type: ProductType = Field(..., description="Category of the product")
     current_price: float = Field(..., gt=0, description="Current listed price")
@@ -43,7 +43,7 @@ class PricingInput(BaseModel):
 
 
 class PricingRecommendation(BaseModel):
-    """Structured output from the pricing strategist."""
+    #Structured output from the pricing strategist.
 
     suggested_price: float = Field(..., gt=0, description="Recommended price")
     confidence: float = Field(..., ge=0, le=1, description="Confidence, 0–1")

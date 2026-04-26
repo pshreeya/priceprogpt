@@ -1,5 +1,5 @@
 scenarios = [
-    # 1. Tuesday off-season hotel room, comp set stable, low occupancy
+    #Tuesday off-season hotel room, comp set stable, low occupancy
     {
         "product_name": "Standard Queen Room",
         "product_description": "A standard queen room at a midscale hotel in a business district.",
@@ -9,7 +9,7 @@ scenarios = [
         "target_market": "Business travelers, off-season, weekday stay.",
         "currency": "USD"
     },
-    # 2. Saturday boutique hotel with concert, comp set raised rates 20%
+    #Saturday boutique hotel with concert, comp set raised rates 20%
     {
         "product_name": "Boutique King Suite",
         "product_description": "Boutique hotel suite, city center, concert weekend.",
@@ -19,7 +19,7 @@ scenarios = [
         "target_market": "Couples and concert-goers, high demand weekend.",
         "currency": "USD"
     },
-    # 3. Concert ticket two weeks before event, slow sales, comps selling well
+    #Concert ticket two weeks before event, slow sales, comps selling well
     {
         "product_name": "Concert Ticket - Balcony",
         "product_description": "Balcony seat for major artist, two weeks out.",
@@ -29,7 +29,7 @@ scenarios = [
         "target_market": "Fans, slow sales for this show, comps selling out.",
         "currency": "USD"
     },
-    # 4. Airbnb listing with festival, 8 nights out, 30% comps booked
+    #Airbnb listing with festival, 8 nights out, 30% comps booked
     {
         "product_name": "2BR Airbnb near Festival Grounds",
         "product_description": "Entire 2-bedroom apartment, walkable to festival.",
@@ -39,7 +39,7 @@ scenarios = [
         "target_market": "Festival attendees, 8 days out, 30% comps booked.",
         "currency": "USD"
     },
-    # 5. E-commerce winter coat, end of season, 40% inventory, comps -25%
+    #E-commerce winter coat, end of season, 40% inventory, comps -25%
     {
         "product_name": "Men's Down Winter Coat",
         "product_description": "Premium down coat, end of winter season.",

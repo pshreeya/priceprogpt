@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from dotenv import load_dotenv
 
-load_dotenv()  # must run before importing analyzer (which reads the API key)
+load_dotenv()  #Must run before importing analyzer (which reads the API key)
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
