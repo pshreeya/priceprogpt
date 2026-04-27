@@ -15,3 +15,6 @@ Some potential use cases include determining the appropriate prices for the foll
 - Concert tickets
 - Airbnb stays
 - E-commerce
+
+Here's a quick demo:
+[![Watch the video](https://img.youtube.com/vi/MZjzAJapgx4/0.jpg)](https://youtu.be/MZjzAJapgx4)
